@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { analyzeComplaint } from "../services/complaintService";
+import { type DomainConfig } from "../config/domains";
 import {
   Card,
   CardContent,
@@ -55,7 +56,7 @@ const userTypes = [
   "Other",
 ];
 
-export function ComplaintForm() {
+export function ComplaintForm({ selectedDomain }: { selectedDomain?: DomainConfig | null }) {
   const navigate = useNavigate();
   const [formData, setFormData] = useState<FormData>({
     title: "",
@@ -63,12 +64,22 @@ export function ComplaintForm() {
     priority: "medium",
     contactInfo: "",
     userType: "student",
-    domain: window.location.hostname,
+    domain: selectedDomain?.id || window.location.hostname,
     status: 'pending'
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+
+  // Update domain when selectedDomain changes
+  useEffect(() => {
+    if (selectedDomain?.id) {
+      setFormData(prev => ({
+        ...prev,
+        domain: selectedDomain.id
+      }));
+    }
+  }, [selectedDomain]);
 
   const handleInputChange = (field: string, value: string) => {
     setFormData((prev) => ({
@@ -187,7 +198,7 @@ export function ComplaintForm() {
           priority: 'medium',
           contactInfo: '',
           userType: 'student',
-          domain: window.location.hostname,
+          domain: selectedDomain?.id || window.location.hostname,
         });
 
         // Redirect to dashboard/complaints list after a short delay
@@ -365,7 +376,7 @@ export function ComplaintForm() {
                       priority: "high",
                       contactInfo: "john.doe@example.com",
                       userType: "student",
-                      domain: window.location.hostname,
+                      domain: selectedDomain?.id || window.location.hostname,
                       status: 'pending'
                     });
                   }}

@@ -15,12 +15,13 @@ import { Dashboard } from "./src/components/Dashboard";
 import { ComplaintForm } from "./src/components/ComplaintForm";
 import { ComplaintAnalytics } from "./src/components/ComplaintAnalytics";
 import { DomainSelector } from "./src/components/DomainSelector";
-import { getCurrentDomain, type DomainConfig } from "./src/config/domains";
+import { getCurrentDomain, DOMAINS, type DomainConfig } from "./src/config/domains";
 import { TabsContent, TabsList, TabsTrigger } from "./src/components/ui/tabs";
 import { Tabs } from "@radix-ui/react-tabs";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "./src/context/AuthContext";
 import complaintsData from "../../backend/data/complaints.json";
+import Profile from "./src/components/Profile";
 
 // Helper function to load complaints from JSON
 const loadComplaintsFromJSON = () => {
@@ -40,21 +41,9 @@ function App() {
   const [selectedDomain, setSelectedDomain] = useState<DomainConfig | null>(() => {
     const currentDomain = getCurrentDomain();
     if (!currentDomain) {
-      const defaultDomainId = 'healthcare'; // Set a default domain ID
-      localStorage.setItem('selectedDomain', defaultDomainId);
-      return {
-        id: 'healthcare',
-        name: 'Healthcare',
-        description: 'Healthcare complaint management system',
-        icon: '🏥',
-        features: ['HIPAA Compliance', 'Patient Privacy', 'Medical Records'],
-        color: '#10b981',
-        theme: {
-          primary: '#10b981',
-          secondary: '#065f46',
-          accent: '#34d399'
-        }
-      };
+      const defaultDomain = DOMAINS[0]; // Use first domain as default
+      localStorage.setItem('selectedDomain', defaultDomain.id);
+      return defaultDomain;
     }
     return currentDomain;
   });
@@ -91,7 +80,7 @@ function App() {
   };
 
   const handleProfileClick = () => {
-    navigate('/app/profile');
+    setActiveTab('profile');
   };
 
   if (showDomainSelector) {
@@ -199,6 +188,7 @@ function App() {
                 setComplaints={setComplaints}
                 setIsLoading={setIsLoading}
                 setIsRefreshing={setIsRefreshing}
+                selectedDomain={selectedDomain}
               />
             </TabsContent>
 
@@ -210,7 +200,7 @@ function App() {
                   determine the priority level, and route it to the appropriate department for quick resolution.
                 </p>
               </div>
-              <ComplaintForm />
+              <ComplaintForm selectedDomain={selectedDomain} />
             </TabsContent>
 
             <TabsContent value="analytics" className="space-y-4 md:space-y-6 rounded-[50px]">
@@ -226,6 +216,19 @@ function App() {
               />
             </TabsContent>
           </Tabs>
+
+          {/* Profile Section - Rendered separately from tabs */}
+          {activeTab === 'profile' && (
+            <div className="space-y-4 md:space-y-6 rounded-[50px]">
+              <div className="mb-4 md:mb-6">
+                <h2 className="text-xl md:text-2xl font-semibold mb-2">User Profile</h2>
+                <p className="text-sm md:text-base text-muted-foreground px-2">
+                  Manage your personal information and view your complaint activity
+                </p>
+              </div>
+              <Profile />
+            </div>
+          )}
         </div>
         {/* Help Section */}
         <div className="fixed bottom-4 right-4 z-50">

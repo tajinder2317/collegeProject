@@ -3,7 +3,7 @@ import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { Progress } from "./ui/progress";
 import { AlertTriangle, Clock, CheckCircle, TrendingUp, Loader2, RefreshCw } from "lucide-react";
-import { getCurrentDomain } from "./DomainConfig";
+import { getCurrentDomain, type DomainConfig } from "../config/domains";
 import { toast } from "sonner";
 import styles from "../styles/scrollbar.module.css";
 import { Complaint, AnalysisResult, complaintService } from '../services/api';
@@ -31,10 +31,11 @@ interface DashboardProps {
   setComplaints: (complaints: ComplaintWithAnalysis[]) => void;
   setIsLoading: (isLoading: boolean) => void;
   setIsRefreshing: (isRefreshing: boolean) => void;
+  selectedDomain?: DomainConfig | null;
 }
 
-export function Dashboard({ complaints, isLoading, isRefreshing, onRefresh, setComplaints, setIsLoading, setIsRefreshing }: DashboardProps) {
-  const domain = getCurrentDomain();
+export function Dashboard({ complaints, isLoading, isRefreshing, onRefresh, setComplaints, setIsLoading, setIsRefreshing, selectedDomain }: DashboardProps) {
+  const domain = selectedDomain || getCurrentDomain();
 
   // Calculate statistics from real data
   const stats = {
@@ -105,7 +106,7 @@ export function Dashboard({ complaints, isLoading, isRefreshing, onRefresh, setC
       <Card className="bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-200">
         <CardContent className="pt-6">
           <div className="flex items-center gap-3">
-            <div className="text-2xl">{domain.icon}</div>
+            <div className="text-2xl">{domain?.icon || '📋'}</div>
             <div>
               <h3 className="font-semibold">Complaint Management System</h3>
               <p className="text-sm text-muted-foreground">Track and manage all complaints in one place</p>

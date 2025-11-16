@@ -3,3 +3,8 @@ Flask-CORS
 pymongo
 Werkzeug
 PyJWT
+joblib
+scikit-learn
+nltk
+pandas
+numpy

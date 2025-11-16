@@ -113,14 +113,17 @@ api.interceptors.response.use(
       if (error.response.status === 401) {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
-        window.location.href = '/login';
+        // Only redirect if not already on login page
+        if (!window.location.pathname.includes('/login')) {
+          window.location.href = '/login';
+        }
       }
     } else if (error.request) {
       // The request was made but no response was received
-      const fullUrl = error.config?.baseURL && error.config?.url 
+      const fullUrl = error.config?.baseURL && error.config?.url
         ? `${error.config.baseURL}${error.config.url}`
         : error.config?.url || 'unknown';
-      
+
       console.error('No response received - Network Error:', {
         url: error.config?.url,
         baseURL: error.config?.baseURL,
@@ -129,7 +132,7 @@ api.interceptors.response.use(
         code: error.code,
         request: error.request
       });
-      
+
       // Create a more helpful error message
       const backendUrl = fullUrl || error.config?.baseURL || 'http://localhost:5001';
       const networkError = new Error(
@@ -187,7 +190,7 @@ export const complaintService = {
       });
       // Re-throw with more context
       if (error.isNetworkError || error.code === 'ECONNREFUSED' || error.message?.includes('Network Error')) {
-        const errorMsg = !API_BASE_URL 
+        const errorMsg = !API_BASE_URL
           ? 'Network Error: Unable to connect via proxy. Please ensure:\n1. Backend is running on http://localhost:5001\n2. Frontend dev server has been restarted after adding proxy config'
           : 'Network Error: Unable to connect to the backend server. Please ensure the backend is running on http://localhost:5001';
         throw new Error(errorMsg);
@@ -245,18 +248,18 @@ export const checkBackendHealth = async (): Promise<boolean> => {
   // Use direct absolute URL to bypass Vite proxy and avoid /api/api doubling
   // Always use http://localhost:5001/api/health directly
   const healthUrl = 'http://localhost:5001/api/health';
-  
+
   console.log('Checking backend health at:', healthUrl);
   console.log('Using direct connection (bypassing Vite proxy)');
-  
+
   try {
     // Create an AbortController for timeout
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
-    
+
     console.log('Making fetch request to:', healthUrl);
     console.log('Request mode: cors, credentials: omit');
-    
+
     // Use fetch directly for health check to avoid axios configuration issues
     // Use mode: 'cors' explicitly and don't send credentials
     const response = await fetch(healthUrl, {
@@ -269,16 +272,16 @@ export const checkBackendHealth = async (): Promise<boolean> => {
       },
       signal: controller.signal,
     });
-    
+
     clearTimeout(timeoutId);
-    
+
     console.log('Response received:', {
       status: response.status,
       statusText: response.statusText,
       ok: response.ok,
       headers: Object.fromEntries(response.headers.entries())
     });
-    
+
     if (response.ok) {
       const data = await response.json();
       console.log('Backend health check successful:', data);
@@ -296,7 +299,7 @@ export const checkBackendHealth = async (): Promise<boolean> => {
       message: error.message,
       stack: error.stack,
     });
-    
+
     // Provide specific error messages based on error type
     if (error.name === 'AbortError') {
       console.error('Request timed out after 5 seconds');
@@ -309,10 +312,10 @@ export const checkBackendHealth = async (): Promise<boolean> => {
     } else if (error.message?.includes('fetch')) {
       console.error('Fetch error - backend may not be accessible');
     }
-    
+
     console.error(`Tried to connect to: ${healthUrl}`);
     console.error('Try opening this URL directly in your browser to test:', healthUrl);
-    
+
     return false;
   }
 };
@@ -342,7 +345,7 @@ export const authService = {
       const url = '/api/auth/register';
       console.log('Registration URL:', url);
       console.log('Full URL will be:', `${API_BASE_URL}${url}`);
-      
+
       const response = await api.post(url, {
         email: userData.email,
         password: userData.password,

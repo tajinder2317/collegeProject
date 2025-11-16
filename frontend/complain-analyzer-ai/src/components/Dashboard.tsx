@@ -255,8 +255,8 @@ export function Dashboard({ complaints, isLoading, isRefreshing, onRefresh, setC
                           <span className="font-medium capitalize">{complaint.analysis?.assignedDepartment || 'General'}</span>
                         </div>
                         <div className="flex items-center gap-1.5">
-                          <span className="font-medium text-muted-foreground">Confidence:</span>
-                          <span className="font-medium">{complaint.analysis?.aiConfidence || 'N/A'}%</span>
+                          <span className="font-medium text-muted-foreground">Submitted by:</span>
+                          <span className="font-medium capitalize">{complaint.userType || 'Student'}</span>
                         </div>
                         <div className="flex items-center gap-1.5">
                           <span className="font-medium text-muted-foreground">Submitted:</span>

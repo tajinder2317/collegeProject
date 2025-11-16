@@ -121,7 +121,7 @@ function App() {
                 variant="ghost"
                 size="sm"
                 onClick={handleProfileClick}
-                className="flex items-center gap-2 hover:bg-gray-100 rounded-[50px]"
+                className="flex items-center gap-2 bg-gray-200 hover:bg-gray-300 rounded-[50px]"
               >
                 <User className="h-4 w-4" />
                 <span className="hidden md:inline">Profile</span>

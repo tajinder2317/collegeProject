@@ -20,5 +20,90 @@
     "id": 1,
     "createdAt": "2025-11-14T10:32:53.003067",
     "status": "pending"
+  },
+  {
+    "id": "d08b9d20-df38-4266-bb3b-f0dcb026f9eb",
+    "title": "harassment issue",
+    "description": "I need to report an incident of harassment",
+    "contactInfo": "soorma@gmail.com",
+    "category": "General",
+    "department": "",
+    "priority": "medium",
+    "userType": "student",
+    "domain": "healthcare",
+    "status": "pending",
+    "createdAt": "2025-11-16T16:56:33.129979"
+  },
+  {
+    "id": "d16156e5-259d-47fb-98ab-1c4a759eec75",
+    "title": "technical issue",
+    "description": "The online application for next semester's housing is not working.",
+    "contactInfo": "sdsdsd@gmail.com",
+    "category": "Admin",
+    "department": "Admin Office",
+    "priority": "High",
+    "userType": "student",
+    "domain": "healthcare",
+    "status": "pending",
+    "createdAt": "2025-11-16T17:03:36.246780",
+    "aiAnalysis": {
+      "type": "Technical",
+      "confidence": 0,
+      "analyzedAt": "2025-11-16T17:03:36.247221"
+    }
+  },
+  {
+    "id": "9d587928-2d7e-450f-a0d2-d474e4476f08",
+    "title": "Broken projector",
+    "description": "broken projector in the small seminar room ",
+    "contactInfo": "sdsdsdsaaaaasd@gmail.com",
+    "category": "IT",
+    "department": "IT Department",
+    "priority": "Medium",
+    "userType": "student",
+    "domain": "college",
+    "status": "pending",
+    "createdAt": "2025-11-16T17:34:34.538506",
+    "aiAnalysis": {
+      "type": "Non-Technical",
+      "confidence": 0,
+      "analyzedAt": "2025-11-16T17:34:34.538731"
+    }
+  },
+  {
+    "id": "1a149c95-129a-42e8-9166-aa339073084f",
+    "title": "college website issue",
+    "description": "It is very hard to use the College Website, it's too complicated",
+    "contactInfo": "soorma@gmail.com",
+    "category": "IT",
+    "department": "IT Department",
+    "priority": "Low",
+    "userType": "student",
+    "domain": "healthcare",
+    "status": "pending",
+    "createdAt": "2025-11-16T17:36:29.076160",
+    "aiAnalysis": {
+      "type": "Technical",
+      "confidence": 0,
+      "analyzedAt": "2025-11-16T17:36:29.076172"
+    }
+  },
+  {
+    "id": "93792ce0-c49a-4e89-bda5-8e19995511f9",
+    "title": "Spelling issue in name",
+    "description": "My name is incorrect on the alumni website",
+    "contactInfo": "abc@gmail.com",
+    "category": "Academics",
+    "department": "Exam Cell",
+    "priority": "High",
+    "userType": "student",
+    "domain": "healthcare",
+    "status": "pending",
+    "createdAt": "2025-11-16T17:38:23.919089",
+    "aiAnalysis": {
+      "type": "Non-Technical",
+      "confidence": 0,
+      "analyzedAt": "2025-11-16T17:38:23.919098"
+    }
   }
 ]

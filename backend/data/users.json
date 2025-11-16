@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "id": "172b497e-4849-4e2e-9bc9-398dc99f5249",
+    "email": "test@example.com",
+    "password": "scrypt:32768:8:1$qd3DzBSFFKldYVEI$553cfe512b2423e24bb17d116fbd2a376cb1279d3bb58d93f9c968f9464715cddfcea5a6521277830ef50919bdd09e5f076f69cb2a61bbb2383287781a34caf2",
+    "name": "Test User",
+    "role": "student",
+    "createdAt": "2025-11-16T17:22:21.010570"
+  },
+  {
+    "id": "af5d2143-383f-4966-bf00-69e8e31eab7f",
+    "email": "dhillonnirmal578@gmail.com",
+    "password": "scrypt:32768:8:1$eTpzUsMFofYrGXOw$7104ae5c6861ff439db5efb04eaff483b99c26a3788734cfc0a7917386fe0486fbb8a6c52b523f0ba346ef2e54898e6a049f3697e594baf391f076bb153e2cc7",
+    "name": "Tajinder Singh Dhillon",
+    "role": "student",
+    "createdAt": "2025-11-16T17:26:32.463820"
+  }
+]

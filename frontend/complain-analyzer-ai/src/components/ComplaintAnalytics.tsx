@@ -130,8 +130,10 @@ function ComplaintAnalysisView({ complaintId, onBack }: ComplaintAnalysisViewPro
   };
 
   return (
-    <div className="space-y-6">
-      <Button onClick={onBack} variant="outline">Back to Analytics</Button>
+    <div className="space-y-6 ">
+      <div className="flex items-center justify-between">
+        <Button onClick={onBack} variant="outline">Back to Analytics</Button>
+      </div>
       {/* Header */}
       <Card>
         <CardHeader>
@@ -919,10 +921,10 @@ const AnalyticsDashboard = ({ onSelectComplaint, complaints, analyticsData }: An
   const COLORS = ["#8884d8", "#82ca9d", "#ffc658", "#ff7300", "#0088fe", "#00C49F"];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 bg-gray-100 p-8 rounded-[15px] text-gray-900">
       <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold tracking-tight">AI-Powered Analytics Dashboard</h2>
-        <p className="text-sm text-muted-foreground">
+        <h2 className="text-2xl font-bold tracking-tight text-gray-900">AI-Powered Analytics Dashboard</h2>
+        <p className="text-sm text-gray-700">
           Showing data for {domain.name}
         </p>
       </div>
@@ -1188,13 +1190,13 @@ const AnalyticsDashboard = ({ onSelectComplaint, complaints, analyticsData }: An
       </Button>
 
       {/* College Domain Indicator */}
-      <Card className="bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-200">
+      <Card className="bg-gradient-to-r from-gray-200 to-indigo-100 border-blue-200">
         <CardContent className="pt-6">
           <div className="flex items-center gap-3">
             <div className="text-2xl">{domain.icon}</div>
             <div>
-              <h3 className="font-semibold">Analytics for {domain.name}</h3>
-              <p className="text-sm text-muted-foreground">
+              <h3 className="font-semibold text-gray-900">Analytics for {domain.name}</h3>
+              <p className="text-sm text-gray-700">
                 Insights specifically tailored for college and university complaint patterns
               </p>
             </div>

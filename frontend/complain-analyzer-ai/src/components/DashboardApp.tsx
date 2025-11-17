@@ -17,7 +17,7 @@ import { Dashboard } from "./Dashboard";
 import { ComplaintForm } from "./ComplaintForm";
 import { ComplaintAnalytics } from "./ComplaintAnalytics";
 import { DomainSelector } from "./DomainSelector";
-import { getCurrentDomain, type DomainConfig } from "../config/domains";
+import { getCurrentDomain, getDomainById, type DomainConfig } from "../config/domains";
 import { TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 import { Tabs } from "@radix-ui/react-tabs";
 import { useNavigate } from "react-router-dom";
@@ -46,21 +46,9 @@ export default function DashboardApp({ children }: DashboardAppProps) {
     const [selectedDomain, setSelectedDomain] = useState<DomainConfig | null>(() => {
         const currentDomain = getCurrentDomain();
         if (!currentDomain) {
-            const defaultDomainId = 'healthcare'; // Set a default domain ID
+            const defaultDomainId = 'college'; // Set a default domain ID
             localStorage.setItem('selectedDomain', defaultDomainId);
-            return {
-                id: 'healthcare',
-                name: 'Healthcare',
-                description: 'Healthcare complaint management system',
-                icon: '🏥',
-                features: ['HIPAA Compliance', 'Patient Privacy', 'Medical Records'],
-                color: '#10b981',
-                theme: {
-                    primary: '#10b981',
-                    secondary: '#065f46',
-                    accent: '#34d399'
-                }
-            };
+            return getDomainById(defaultDomainId) || null;
         }
         return currentDomain;
     });
@@ -171,7 +159,7 @@ export default function DashboardApp({ children }: DashboardAppProps) {
                                 <div className="rounded-[50px] w-[80%] mx-auto">
                                     <TabsList
                                         id="selector-elector"
-                                        className="bg-gray-100 text-muted-foreground items-center justify-center rounded-[50px] py-[2px] px-[-1px] grid w-[80%] max-w-xs sm:max-w-md md:max-w-xl lg:max-w-2xl grid-cols-3 mb-4 md:mb-6 h-11 mx-auto rounded-[100px]">
+                                        className="bg-gray-100 text-gray-700 items-center justify-center rounded-[50px] py-[2px] px-[-1px] grid w-[80%] max-w-xs sm:max-w-md md:max-w-xl lg:max-w-2xl grid-cols-3 mb-4 md:mb-6 h-11 mx-auto rounded-[100px]">
                                         <TabsTrigger
                                             value="dashboard"
                                             className="flex items-center justify-center gap-1 py-2 text-xs md:text-sm rounded-[50px] min-w-0">
@@ -198,7 +186,7 @@ export default function DashboardApp({ children }: DashboardAppProps) {
                                         <h2 className="text-xl md:text-2xl font-semibold mb-2">
                                             {selectedDomain?.name || 'Dashboard'} Dashboard
                                         </h2>
-                                        <p className="text-sm md:text-base text-muted-foreground">
+                                        <p className="text-sm md:text-base text-gray-700">
                                             Monitor and manage all {selectedDomain?.name?.toLowerCase() || 'complaint'} complaints in one place
                                         </p>
                                     </div>
@@ -216,7 +204,7 @@ export default function DashboardApp({ children }: DashboardAppProps) {
                                 <TabsContent value="complaints" className="space-y-4 md:space-y-6 rounded-[50px]">
                                     <div className="mb-4 md:mb-6 text-center">
                                         <h2 className="text-xl md:text-2xl font-semibold mb-2">Submit a Complaint</h2>
-                                        <p className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto px-2">
+                                        <p className="text-sm md:text-base text-gray-700 max-w-2xl mx-auto px-2">
                                             Our AI system will automatically analyze your complaint, categorize it based on {selectedDomain?.name?.toLowerCase() || 'general'} standards,
                                             determine the priority level, and route it to the appropriate department for quick resolution.
                                         </p>
@@ -227,7 +215,7 @@ export default function DashboardApp({ children }: DashboardAppProps) {
                                 <TabsContent value="analytics" className="space-y-4 md:space-y-6 rounded-[50px]">
                                     <div className="mb-4 md:mb-6">
                                         <h2 className="text-xl md:text-2xl font-semibold mb-2">Analytics & Insights</h2>
-                                        <p className="text-sm md:text-base text-muted-foreground px-2">
+                                        <p className="text-sm md:text-base text-gray-700 px-2">
                                             Comprehensive analytics powered by AI to identify patterns, trends, and improvement opportunities
                                             specific to {selectedDomain?.name?.toLowerCase() || 'general'}s
                                         </p>
@@ -249,7 +237,7 @@ export default function DashboardApp({ children }: DashboardAppProps) {
                         {/* Footer with domain info */}
                         <div className="border-t bg-muted/30 py-3 md:py-4 mt-8 md:mt-12">
                             <div className="container mx-auto px-3 md:px-4">
-                                <div className="flex flex-col md:flex-row items-center justify-between gap-2 md:gap-0 text-xs md:text-sm text-muted-foreground">
+                                <div className="flex flex-col md:flex-row items-center justify-between gap-2 md:gap-0 text-xs md:text-sm text-gray-700">
                                     <div className="flex items-center gap-2">
                                         <span>Current Domain:</span>
                                         <Badge variant="outline" className="flex items-center gap-1 text-xs">

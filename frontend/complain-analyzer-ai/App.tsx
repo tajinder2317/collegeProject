@@ -41,7 +41,7 @@ function App() {
   const [selectedDomain, setSelectedDomain] = useState<DomainConfig | null>(() => {
     const currentDomain = getCurrentDomain();
     if (!currentDomain) {
-      const defaultDomain = DOMAINS[0]; // Use first domain as default
+      const defaultDomain = DOMAINS.find(domain => domain.id === 'college') || DOMAINS[0]; // Use college domain as default
       localStorage.setItem('selectedDomain', defaultDomain.id);
       return defaultDomain;
     }

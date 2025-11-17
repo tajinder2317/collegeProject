@@ -11,6 +11,16 @@ export interface DomainConfig {
 
 export const DOMAINS: DomainConfig[] = [
   {
+    id: 'college',
+    name: 'Educational Institution',
+    description: 'Complaint management for colleges, universities, and educational institutes',
+    icon: '🎓',
+    theme: {
+      primary: 'bg-purple-600 hover:bg-purple-700',
+      secondary: 'bg-purple-100 text-purple-800'
+    }
+  },
+  {
     id: 'healthcare',
     name: 'Healthcare',
     description: 'Patient complaints and healthcare service feedback',

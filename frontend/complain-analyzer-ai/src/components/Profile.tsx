@@ -51,7 +51,7 @@ const Profile = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-4xl">
+    <div className="container mx-auto px-8 py-10 max-w-4xl bg-gray-300 rounded-[25px]">
       <div className="grid gap-6 md:grid-cols-3">
         {/* Profile Overview Card */}
         <Card className="md:col-span-1">

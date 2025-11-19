@@ -105,5 +105,23 @@
       "confidence": 0,
       "analyzedAt": "2025-11-16T17:38:23.919098"
     }
+  },
+  {
+    "id": "0d2f027c-d2c8-4e46-9893-360f7e81e777",
+    "title": "Computer lab issue",
+    "description": "The latest version of the design software is not available in the computer lab.",
+    "contactInfo": "abc@gmail.com",
+    "category": "IT",
+    "department": "IT Department",
+    "priority": "Medium",
+    "userType": "student",
+    "domain": "college",
+    "status": "pending",
+    "createdAt": "2025-11-19T08:15:10.011672",
+    "aiAnalysis": {
+      "type": "Technical",
+      "confidence": 0,
+      "analyzedAt": "2025-11-19T08:15:10.011762"
+    }
   }
 ]
